@@ -1,6 +1,4 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import data from '../../utils/data';
+import React, { useContext } from 'react';
 import Layout from '../../components/Layout';
 import NextLink from 'next/link';
 import Image from 'next/image';
@@ -14,15 +12,30 @@ import {
   Button,
 } from '@material-ui/core';
 import useStyles from '../../utils/styles';
-
-export default function ProductScreen() {
-  const router = useRouter();
+import Product from '../../models/Product';
+import db from '../../utils/db';
+import axios from 'axios';
+import { Store } from '../../utils/Store';
+import { useRouter } from 'next/router';
+//props from below backend data
+export default function ProductScreen(props) {
+  const { product } = props;
+  const { dispatch } = useContext(Store);
   const classes = useStyles();
-  const { slug } = router.query;
-  const product = data.products.find((a) => a.slug === slug);
+  const router = useRouter();
+  // const product = data.products.find((a) => a.slug === slug);
   if (!product) {
     return <div>Product Not Found</div>;
   }
+  const addToCartHandler = async () => {
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock <= 0) {
+      window.alert('Sorry, but this product out of stock');
+      return;
+    }
+    dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity: 1 } });
+    router.push('/cart');
+  };
   return (
     <Layout title={product.name} description={product.description}>
       <div className={classes.section}>
@@ -91,7 +104,12 @@ export default function ProductScreen() {
                 </Grid>
               </ListItem>
               <ListItem>
-                <Button fullWidth variant="contained" color="primary">
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  onClick={addToCartHandler}
+                >
                   Add to Cart
                 </Button>
               </ListItem>
@@ -101,4 +119,20 @@ export default function ProductScreen() {
       </Grid>
     </Layout>
   );
+}
+
+//getting data from backend
+//same as product page but here we have dynamic url so we also pass context(params)
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { slug } = params;
+
+  await db.connect();
+  const product = await Product.findOne({ slug }).lean();
+  await db.disconnect();
+  return {
+    props: {
+      product: db.convertDocToObj(product),
+    },
+  };
 }
