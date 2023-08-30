@@ -2,18 +2,21 @@ import Cookies from 'js-cookie';
 import { createContext, useReducer } from 'react';
 
 export const Store = createContext();
+
 const initialState = {
   darkMode: Cookies.get('darkMode') === 'NO' ? true : false,
   cart: {
     cartItems: Cookies.get('cartItems')
       ? JSON.parse(Cookies.get('cartItems'))
       : [],
+    shippingAddress: Cookies.get('shippingAddress')
+      ? JSON.stringify(Cookies.get('shippingAddress'))
+      : {},
   },
-  UserInfo: Cookies.get('userInfo')
+  userInfo: Cookies.get('userInfo')
     ? JSON.stringify(Cookies.get('userInfo'))
     : null,
 };
-
 function reducer(state, action) {
   switch (action.type) {
     case 'DARK_MODE_ON':
@@ -40,6 +43,11 @@ function reducer(state, action) {
       Cookies.set('cartItems', JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case 'SAVE_SHIPPING_ADDRESS':
+      return {
+        ...state,
+        cart: { shippingAddress: action.payload },
+      };
     case 'USER_LOGIN':
       return { ...state, userInfo: action.payload };
     case 'USER_LOGOUT':

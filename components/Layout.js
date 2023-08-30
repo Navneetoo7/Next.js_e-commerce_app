@@ -49,6 +49,9 @@ function Layout({ title, children, description }) {
       },
     },
   });
+  console.log(userInfo, 'user-------------------');
+  console.log('cartItemscartItemscartItems', cart);
+
   const darkModeChangeHandler = () => {
     dispatch({ type: darkMode ? 'DARK_MODE_OFF' : 'DARK_MODE_ON' });
     const newDarkMode = !darkMode;
