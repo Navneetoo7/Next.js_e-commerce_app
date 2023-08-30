@@ -11,11 +11,11 @@ import {
   Card,
   Button,
 } from '@material-ui/core';
-import useStyles from '../../utils/styles';
+import useStyles from '../../Utils/styles';
 import Product from '../../models/Product';
 import db from '../../utils/db';
 import axios from 'axios';
-import { Store } from '../../utils/Store';
+import { Store } from '../../Utils/Store';
 import { useRouter } from 'next/router';
 //props from below backend data
 export default function ProductScreen(props) {
