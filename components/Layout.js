@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Head from 'next/head';
-import useStyles from '../utils/styles';
+import useStyles from '../utils/styles.js';
+
 import NextLink from 'next/link';
 import {
   AppBar,

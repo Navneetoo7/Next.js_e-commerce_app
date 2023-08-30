@@ -45,7 +45,7 @@ export default function Shipping() {
     setValue('city', shippingAddress.city);
     setValue('postalCode', shippingAddress.postalCode);
     setValue('country', shippingAddress.country);
-  }, []);
+  }, [router, setValue, shippingAddress, userInfo]);
 
   const submitHandler = ({ fullName, address, city, postalCode, country }) => {
     dispatch({
