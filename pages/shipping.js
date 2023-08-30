@@ -16,7 +16,7 @@ import { Controller, useForm } from 'react-hook-form';
 export default function Shipping() {
   const router = useRouter();
   const { redirect } = router.query; //login?redirect=/shipping
-  console.log(redirect);
+  console.log(redirect);  
   const {
     handleSubmit,
     control,
