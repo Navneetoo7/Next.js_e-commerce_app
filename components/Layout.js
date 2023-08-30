@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Head from 'next/head';
 // import useStyles from '../utils/styles';
-import useStyles from "../utils/styles"
+import useStyles from "../Utils/styles"
 
 import NextLink from 'next/link';
 import {
@@ -19,7 +19,7 @@ import {
   Menu,
   MenuItem,
 } from '@material-ui/core';
-import { Store } from '../utils/Store';
+import { Store } from '../Utils/Store';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 

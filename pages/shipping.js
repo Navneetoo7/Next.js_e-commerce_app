@@ -7,8 +7,8 @@ import {
 } from '@material-ui/core';
 import React, { useContext, useEffect } from 'react';
 import Layout from '../components/Layout';
-import useStyles from '../utils/styles';
-import { Store } from '../utils/Store';
+import useStyles from '../Utils/styles';
+import { Store } from '../Utils/Store';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import { Controller, useForm } from 'react-hook-form';
