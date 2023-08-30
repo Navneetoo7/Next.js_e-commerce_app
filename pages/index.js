@@ -8,7 +8,7 @@ import {
   CardActions,
   Button,
 } from '@material-ui/core';
-import db from '../utils/db';
+import db from '../Utils/db';
 import NextLink from 'next/link';
 import Layout from '../components/Layout';
 import Product from '../models/Product';

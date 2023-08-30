@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import useStyles from '../../Utils/styles';
 import Product from '../../models/Product';
-import db from '../../utils/db';
+import db from '../../Utils/db';
 import axios from 'axios';
 import { Store } from '../../Utils/Store';
 import { useRouter } from 'next/router';
